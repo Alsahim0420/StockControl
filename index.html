@@ -4,19 +4,30 @@
     <!-- ===== CONFIGURACIÓN DE LA PÁGINA ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <title>StockControl | Control de inventarios</title>
+    <!-- SEO: descripción que aparece en los resultados de búsqueda -->
+    <meta name="description" content="StockControl: plataforma para controlar el inventario de tu negocio. Registra productos, proveedores y movimientos en un solo lugar.">
+    <!-- SEO: título de la pestaña y del resultado en buscadores -->
+    <title>StockControl | Controla. Organiza. Optimiza.</title>
+    <!-- Tipografía desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-    <!-- ===== ENCABEZADO Y MENÚ DE LA LANDING ===== -->
-    <header>
+    <!-- ===== ENCABEZADO Y MENÚ DE NAVEGACIÓN ===== -->
+    <header class="encabezado">
+        <a href="#inicio" class="marca">
+            <img src="img/logo.jpg" alt="Logo de StockControl: caja azul con las letras SC" class="marca-logo">
+        </a>
         <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#login">Iniciar sesión</a></li>
-                <li><a href="#registro">Registrarse</a></li>
+            <ul class="menu">
+                <li><a href="#funciones">Funciones</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#video">Video</a></li>
+                <li><a href="#acceso" class="boton boton-secundario">Iniciar sesión</a></li>
+                <li><a href="#acceso" class="boton boton-principal">Registrarse</a></li>
             </ul>
         </nav>
     </header>
@@ -24,26 +35,162 @@
     <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main>
 
-        <!-- Presentación de StockControl -->
-        <section id="inicio">
-
+        <!-- Portada (hero): mensaje principal y llamado a la acción -->
+        <section id="inicio" class="hero">
+            <div class="hero-texto">
+                <p class="eslogan">Controla. Organiza. Optimiza.</p>
+                <h1>El inventario de tu negocio, claro y siempre al día</h1>
+                <p>
+                    StockControl te ayuda a saber qué productos tienes, cuáles se están
+                    agotando y a quién debes pedirle mercancía, sin hojas de cálculo
+                    ni cuadernos.
+                </p>
+                <div class="hero-botones">
+                    <a href="#acceso" class="boton boton-principal">Crear cuenta gratis</a>
+                    <a href="#funciones" class="boton boton-secundario">Ver funciones</a>
+                </div>
+            </div>
+            <img src="img/panel.svg" alt="Vista previa del panel de StockControl con gráficos y lista de productos" class="hero-imagen">
         </section>
 
-        <!-- Formulario de inicio de sesión: al entrar lleva a productos.html -->
-        <section id="login">
-
+        <!-- Funciones de la plataforma (lista desordenada) -->
+        <section id="funciones" class="seccion">
+            <h2>¿Qué puedes hacer con StockControl?</h2>
+            <ul class="tarjetas">
+                <li class="tarjeta">
+                    <h3>Registrar productos</h3>
+                    <p>Guarda código, nombre, cantidad y precio de cada producto.</p>
+                </li>
+                <li class="tarjeta">
+                    <h3>Alertas de stock bajo</h3>
+                    <p>Entérate antes de que un producto se agote.</p>
+                </li>
+                <li class="tarjeta">
+                    <h3>Gestionar proveedores</h3>
+                    <p>Ten a la mano quién te surte y qué día entrega.</p>
+                </li>
+                <li class="tarjeta">
+                    <h3>Entradas y salidas</h3>
+                    <p>Lleva el historial de lo que entra y sale de tu bodega.</p>
+                </li>
+            </ul>
         </section>
 
-        <!-- Formulario de registro de usuario nuevo -->
-        <section id="registro">
+        <!-- Comparación de planes (tabla) -->
+        <section id="planes" class="seccion seccion-alterna">
+            <h2>Planes</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Productos</th>
+                            <th>Usuarios</th>
+                            <th>Alertas de stock</th>
+                            <th>Precio mensual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Básico</td>
+                            <td>Hasta 100</td>
+                            <td>1</td>
+                            <td>No</td>
+                            <td>Gratis</td>
+                        </tr>
+                        <tr>
+                            <td>Negocio</td>
+                            <td>Hasta 1.000</td>
+                            <td>3</td>
+                            <td>Sí</td>
+                            <td>$30.000</td>
+                        </tr>
+                        <tr>
+                            <td>Empresa</td>
+                            <td>Ilimitados</td>
+                            <td>10</td>
+                            <td>Sí</td>
+                            <td>$80.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
+        <!-- Video incrustado de YouTube -->
+        <section id="video" class="seccion">
+            <h2>¿Por qué controlar tu inventario?</h2>
+            <div class="video-contenedor">
+                <!-- REEMPLAZAR: cambie VIDEO_ID por el código del video de YouTube -->
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                        title="Video sobre la importancia del control de inventarios"
+                        allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Acceso: formularios de inicio de sesión y registro -->
+        <section id="acceso" class="seccion seccion-alterna">
+            <h2>Accede a StockControl</h2>
+            <div class="formularios">
+
+                <!-- Formulario de inicio de sesión -->
+                <form id="form-login" class="formulario">
+                    <h3>Iniciar sesión</h3>
+
+                    <label for="login-correo">Correo electrónico</label>
+                    <input type="email" id="login-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+
+                    <label for="login-clave">Contraseña</label>
+                    <input type="password" id="login-clave" name="clave" minlength="6" required>
+
+                    <label class="casilla">
+                        <input type="checkbox" name="recordar"> Recordarme
+                    </label>
+
+                    <button type="submit" class="boton boton-principal">Entrar</button>
+                </form>
+
+                <!-- Formulario de registro -->
+                <form id="form-registro" class="formulario">
+                    <h3>Crear cuenta</h3>
+
+                    <label for="reg-nombre">Nombre completo</label>
+                    <input type="text" id="reg-nombre" name="nombre" maxlength="50" required>
+
+                    <label for="reg-negocio">Nombre del negocio</label>
+                    <input type="text" id="reg-negocio" name="negocio" required>
+
+                    <label for="reg-correo">Correo electrónico</label>
+                    <input type="email" id="reg-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+
+                    <label for="reg-clave">Contraseña</label>
+                    <input type="password" id="reg-clave" name="clave" minlength="6" required>
+
+                    <label for="reg-plan">Plan</label>
+                    <select id="reg-plan" name="plan" required>
+                        <option value="">Selecciona un plan</option>
+                        <option value="basico">Básico</option>
+                        <option value="negocio">Negocio</option>
+                        <option value="empresa">Empresa</option>
+                    </select>
+
+                    <label class="casilla">
+                        <input type="checkbox" name="terminos" required> Acepto los términos y condiciones
+                    </label>
+
+                    <button type="submit" class="boton boton-principal">Registrarme</button>
+                </form>
+
+            </div>
         </section>
 
     </main>
 
     <!-- ===== PIE DE PÁGINA ===== -->
-    <footer>
-
+    <footer class="pie">
+        <p class="pie-marca">StockControl</p>
+        <p>Controla. Organiza. Optimiza.</p>
+        <p>&copy; 2026 StockControl. Todos los derechos reservados.</p>
     </footer>
 
 </body>

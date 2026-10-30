@@ -1,0 +1,365 @@
+/* ===== PALETA DE COLORES DE STOCKCONTROL ===== */
+:root {
+    --azul-oscuro: #0B2D5C;       /* Encabezados, textos importantes y pie de página */
+    --azul-corporativo: #123B66;  /* Menú de navegación y botones principales */
+    --azul-brillante: #168BEB;    /* Botones destacados, enlaces e iconos */
+    --azul-claro: #69BFFF;        /* Detalles, bordes e indicadores */
+    --azul-muy-claro: #EAF5FF;    /* Fondos de secciones y tarjetas */
+    --blanco: #FFFFFF;            /* Fondo principal y textos sobre fondos oscuros */
+    --gris-claro: #F4F7FB;        /* Fondo alternativo de la página */
+    --gris-oscuro: #334155;       /* Textos y descripciones */
+}
+
+/* ===== ESTILOS GENERALES (selectores de etiqueta) ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: var(--blanco);
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: var(--azul-oscuro);
+    line-height: 1.2;
+}
+
+a {
+    color: var(--azul-brillante);
+}
+
+img {
+    max-width: 100%;
+}
+
+/* ===== BOTONES (selectores de clase) ===== */
+.boton {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 2px solid var(--azul-brillante);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    /* Animación suave al pasar el mouse */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.boton:hover {
+    transform: translateY(-2px);
+}
+
+.boton-principal {
+    background-color: var(--azul-brillante);
+    color: var(--blanco);
+}
+
+.boton-principal:hover {
+    background-color: var(--azul-corporativo);
+    border-color: var(--azul-corporativo);
+}
+
+.boton-secundario {
+    background-color: transparent;
+    color: var(--azul-brillante);
+}
+
+.boton-secundario:hover {
+    background-color: var(--azul-muy-claro);
+}
+
+/* ===== ENCABEZADO Y MENÚ (Flexbox) ===== */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 40px;
+    background-color: var(--blanco);
+    border-bottom: 1px solid var(--azul-muy-claro);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.marca-logo {
+    height: 64px;
+    display: block;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu a:not(.boton) {
+    color: var(--azul-corporativo);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.menu a:not(.boton):hover {
+    color: var(--azul-brillante);
+}
+
+/* ===== PORTADA / HERO (Flexbox) ===== */
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 70px 40px;
+    background: linear-gradient(180deg, var(--azul-muy-claro), var(--blanco));
+}
+
+.hero-texto {
+    flex: 1;
+}
+
+.hero-texto h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 8px 0 16px;
+}
+
+.eslogan {
+    color: var(--azul-brillante);
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.hero-botones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.hero-imagen {
+    flex: 1;
+    max-width: 520px;
+    /* Animación de entrada con @keyframes */
+    animation: flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+/* ===== SECCIONES ===== */
+.seccion {
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.seccion h2 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.seccion-alterna {
+    background-color: var(--gris-claro);
+}
+
+/* ===== TARJETAS DE FUNCIONES (Flexbox) ===== */
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 32px auto 0;
+    max-width: 1100px;
+}
+
+.tarjeta {
+    flex: 1 1 220px;
+    max-width: 260px;
+    padding: 24px;
+    background-color: var(--azul-muy-claro);
+    border-top: 4px solid var(--azul-claro);
+    border-radius: 12px;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(11, 45, 92, 0.12);
+}
+
+.tarjeta h3 {
+    margin-top: 0;
+}
+
+/* ===== TABLA DE PLANES ===== */
+.tabla-contenedor {
+    overflow-x: auto;
+    max-width: 900px;
+    margin: 32px auto 0;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--blanco);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tabla th {
+    background-color: var(--azul-corporativo);
+    color: var(--blanco);
+    padding: 14px;
+}
+
+.tabla td {
+    padding: 14px;
+    border-bottom: 1px solid var(--azul-muy-claro);
+}
+
+.tabla tbody tr:hover {
+    background-color: var(--azul-muy-claro);
+}
+
+/* ===== VIDEO ===== */
+.video-contenedor {
+    max-width: 800px;
+    margin: 32px auto 0;
+    aspect-ratio: 16 / 9;
+}
+
+.video-contenedor iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 12px;
+}
+
+/* ===== FORMULARIOS DE ACCESO (Flexbox) ===== */
+.formularios {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 320px;
+    max-width: 420px;
+    padding: 30px;
+    background-color: var(--blanco);
+    border: 1px solid var(--azul-claro);
+    border-radius: 12px;
+    text-align: left;
+}
+
+.formulario h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.formulario label {
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="password"],
+.formulario select {
+    margin-top: 4px;
+    padding: 10px;
+    border: 1px solid var(--azul-claro);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.formulario input:focus,
+.formulario select:focus {
+    outline: none;
+    border-color: var(--azul-brillante);
+}
+
+.casilla {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400 !important;
+}
+
+.formulario .boton {
+    margin-top: 20px;
+}
+
+/* ===== PIE DE PÁGINA ===== */
+.pie {
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.pie p {
+    margin: 4px 0;
+}
+
+.pie-marca {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+/* ===== RESPONSIVE: TABLET ===== */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-botones {
+        justify-content: center;
+    }
+}
+
+/* ===== RESPONSIVE: CELULAR ===== */
+@media (max-width: 600px) {
+    .encabezado {
+        flex-direction: column;
+        padding: 8px 16px;
+        position: static;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .hero,
+    .seccion {
+        padding: 40px 16px;
+    }
+
+    .hero-texto h1 {
+        font-size: 1.9rem;
+    }
+}
