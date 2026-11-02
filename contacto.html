@@ -4,20 +4,28 @@
     <!-- ===== CONFIGURACIÓN DE LA PÁGINA ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="Escríbele al equipo de StockControl: dudas sobre planes, ayuda con tu cuenta o sugerencias.">
     <title>Contacto | StockControl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-    <!-- ===== ENCABEZADO Y MENÚ DE LA PLATAFORMA ===== -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="proveedores.html">Proveedores</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="index.html">Cerrar sesión</a></li>
+    <!-- ===== ENCABEZADO Y MENÚ DE NAVEGACIÓN ===== -->
+    <header class="encabezado">
+        <a href="index.html" class="marca">
+            <img src="img/logo.jpg" alt="StockControl" class="marca-logo">
+        </a>
+        <nav aria-label="Principal">
+            <ul class="menu">
+                <li><a href="index.html#funciones">Funciones</a></li>
+                <li><a href="index.html#planes">Planes</a></li>
+                <li><a href="index.html#video">Video</a></li>
+                <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+                <li><a href="index.html#acceso" class="boton boton-secundario">Iniciar sesión</a></li>
+                <li><a href="index.html#registro" class="boton boton-principal">Registrarse</a></li>
             </ul>
         </nav>
     </header>
@@ -25,12 +33,82 @@
     <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main>
 
+        <section class="acceso contacto">
+            <div class="acceso-texto">
+                <h1>Hablemos de tu inventario</h1>
+                <p>¿Dudas sobre qué plan te sirve, problemas con tu cuenta o una idea para mejorar? Escríbenos y te respondemos en un día hábil.</p>
+
+                <!-- Otras formas de contacto -->
+                <dl class="contacto-datos">
+                    <div>
+                        <dt>Correo</dt>
+                        <dd><a href="mailto:hola@stockcontrol.co">hola@stockcontrol.co</a></dd>
+                    </div>
+                    <div>
+                        <dt>WhatsApp</dt>
+                        <dd><a href="https://wa.me/573001234567">300 1234567</a></dd>
+                    </div>
+                    <div>
+                        <dt>Horario</dt>
+                        <dd>Lunes a viernes, 8:00 a. m. a 6:00 p. m.</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <!-- Formulario de contacto (js/contacto.js) -->
+            <div class="acceso-tarjeta">
+                <form id="form-contacto" class="formulario formulario-contacto">
+                    <h2>Envíanos un mensaje</h2>
+
+                    <div class="campo">
+                        <label for="con-nombre">Tu nombre</label>
+                        <input type="text" id="con-nombre" name="nombre" maxlength="80" autocomplete="name" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="con-correo">Correo electrónico</label>
+                        <input type="email" id="con-correo" name="correo" maxlength="120" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+                    </div>
+
+                    <fieldset class="planes-opciones motivos">
+                        <legend>¿Sobre qué nos escribes?</legend>
+                        <label class="plan-opcion">
+                            <input type="radio" name="motivo" value="planes" checked>
+                            <span class="plan-nombre">Planes</span>
+                        </label>
+                        <label class="plan-opcion">
+                            <input type="radio" name="motivo" value="soporte">
+                            <span class="plan-nombre">Ayuda</span>
+                        </label>
+                        <label class="plan-opcion">
+                            <input type="radio" name="motivo" value="otro">
+                            <span class="plan-nombre">Otro</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="campo">
+                        <label for="con-mensaje">Mensaje</label>
+                        <textarea id="con-mensaje" name="mensaje" rows="5" maxlength="2000" required></textarea>
+                    </div>
+
+                    <button type="submit" class="boton boton-principal boton-ancho">Enviar mensaje</button>
+                    <p class="mensaje" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
     </main>
 
     <!-- ===== PIE DE PÁGINA ===== -->
-    <footer>
-
+    <footer class="pie">
+        <p class="pie-marca">StockControl</p>
+        <p>Controla. Organiza. Optimiza.</p>
+        <p class="pie-legal">&copy; 2026 StockControl. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- ===== SCRIPTS: conexión con Supabase ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/contacto.js"></script>
 </body>
 </html>

@@ -8,10 +8,10 @@
     <meta name="description" content="StockControl: plataforma para controlar el inventario de tu negocio. Registra productos, proveedores y movimientos en un solo lugar.">
     <!-- SEO: título de la pestaña y del resultado en buscadores -->
     <title>StockControl | Controla. Organiza. Optimiza.</title>
-    <!-- Tipografía desde Google Fonts -->
+    <!-- Tipografías desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -19,15 +19,16 @@
     <!-- ===== ENCABEZADO Y MENÚ DE NAVEGACIÓN ===== -->
     <header class="encabezado">
         <a href="#inicio" class="marca">
-            <img src="img/logo.jpg" alt="Logo de StockControl: caja azul con las letras SC" class="marca-logo">
+            <img src="img/logo.jpg" alt="StockControl" class="marca-logo">
         </a>
-        <nav>
+        <nav aria-label="Principal">
             <ul class="menu">
                 <li><a href="#funciones">Funciones</a></li>
                 <li><a href="#planes">Planes</a></li>
                 <li><a href="#video">Video</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="#acceso" class="boton boton-secundario">Iniciar sesión</a></li>
-                <li><a href="#acceso" class="boton boton-principal">Registrarse</a></li>
+                <li><a href="#registro" class="boton boton-principal">Registrarse</a></li>
             </ul>
         </nav>
     </header>
@@ -35,43 +36,88 @@
     <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main>
 
-        <!-- Portada (hero): mensaje principal y llamado a la acción -->
+        <!-- Portada (hero): mensaje principal y hoja de inventario de ejemplo -->
         <section id="inicio" class="hero">
             <div class="hero-texto">
                 <p class="eslogan">Controla. Organiza. Optimiza.</p>
                 <h1>El inventario de tu negocio, claro y siempre al día</h1>
-                <p>
-                    StockControl te ayuda a saber qué productos tienes, cuáles se están
-                    agotando y a quién debes pedirle mercancía, sin hojas de cálculo
-                    ni cuadernos.
+                <p class="hero-bajada">
+                    Sabe qué productos tienes, cuáles se están agotando y a quién
+                    pedirle mercancía, sin hojas de cálculo ni cuadernos.
                 </p>
                 <div class="hero-botones">
-                    <a href="#acceso" class="boton boton-principal">Crear cuenta gratis</a>
+                    <a href="#registro" class="boton boton-principal">Crear cuenta gratis</a>
                     <a href="#funciones" class="boton boton-secundario">Ver funciones</a>
                 </div>
             </div>
-            <img src="img/panel.svg" alt="Vista previa del panel de StockControl con gráficos y lista de productos" class="hero-imagen">
+
+            <!-- Hoja de inventario animada (js/demo.js) -->
+            <figure class="hoja" aria-label="Ejemplo de inventario en StockControl">
+                <div class="hoja-cabecera">
+                    <span>Bodega principal</span>
+                    <span>Hoy, 8:30 a. m.</span>
+                </div>
+                <table class="hoja-tabla">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col" class="num">Mínimo</th>
+                            <th scope="col" class="num">En stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Arroz blanco 500 g<small>ARZ-500</small></td>
+                            <td class="num">20</td>
+                            <td class="num"><span class="barra" style="--nivel: .82"></span>64</td>
+                        </tr>
+                        <tr>
+                            <td>Aceite de girasol 1 L<small>ACT-1000</small></td>
+                            <td class="num">10</td>
+                            <td class="num"><span class="barra" style="--nivel: .55"></span>31</td>
+                        </tr>
+                        <tr id="fila-alerta">
+                            <td>Café molido 250 g<small>CAF-250</small></td>
+                            <td class="num">6</td>
+                            <td class="num"><span class="barra" id="barra-cafe" style="--nivel: .6"></span><span id="stock-cafe">18</span></td>
+                        </tr>
+                        <tr>
+                            <td>Panela 1 kg<small>PAN-1000</small></td>
+                            <td class="num">12</td>
+                            <td class="num"><span class="barra" style="--nivel: .45"></span>27</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="hoja-alerta" id="aviso-cafe" role="status">
+                    <strong>Quedan 4 de café molido.</strong>
+                    Pídele a Café La Vega: entrega los jueves.
+                </p>
+            </figure>
         </section>
 
         <!-- Funciones de la plataforma (lista desordenada) -->
         <section id="funciones" class="seccion">
-            <h2>¿Qué puedes hacer con StockControl?</h2>
-            <ul class="tarjetas">
-                <li class="tarjeta">
-                    <h3>Registrar productos</h3>
+            <h2>Todo tu inventario en un solo lugar</h2>
+            <ul class="funciones">
+                <li class="funcion">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4v10l-9 4-9-4z M3 7l9 4 9-4 M12 11v10"/></svg>
+                    <h3>Registra tus productos</h3>
                     <p>Guarda código, nombre, cantidad y precio de cada producto.</p>
                 </li>
-                <li class="tarjeta">
-                    <h3>Alertas de stock bajo</h3>
-                    <p>Entérate antes de que un producto se agote.</p>
+                <li class="funcion funcion-alerta">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z M12 10v5 M12 18v.5"/></svg>
+                    <h3>Recibe alertas de stock bajo</h3>
+                    <p>Entérate antes de que un producto se agote, no cuando el cliente lo pide.</p>
                 </li>
-                <li class="tarjeta">
-                    <h3>Gestionar proveedores</h3>
-                    <p>Ten a la mano quién te surte y qué día entrega.</p>
+                <li class="funcion">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h12v9H2z M14 10h4l4 3v3h-8 M6 19a2 2 0 100-4 2 2 0 000 4z M18 19a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                    <h3>Organiza tus proveedores</h3>
+                    <p>Ten a la mano quién te surte cada producto y qué día entrega.</p>
                 </li>
-                <li class="tarjeta">
-                    <h3>Entradas y salidas</h3>
-                    <p>Lleva el historial de lo que entra y sale de tu bodega.</p>
+                <li class="funcion">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16 M3 8l4-4 4 4 M17 20V4 M13 16l4 4 4-4"/></svg>
+                    <h3>Lleva entradas y salidas</h3>
+                    <p>Consulta el historial de lo que entra y sale de tu bodega.</p>
                 </li>
             </ul>
         </section>
@@ -79,38 +125,39 @@
         <!-- Comparación de planes (tabla) -->
         <section id="planes" class="seccion seccion-alterna">
             <h2>Planes</h2>
+            <p class="seccion-bajada">Empieza gratis y cambia de plan cuando tu negocio crezca.</p>
             <div class="tabla-contenedor">
                 <table class="tabla">
                     <thead>
                         <tr>
-                            <th>Plan</th>
-                            <th>Productos</th>
-                            <th>Usuarios</th>
-                            <th>Alertas de stock</th>
-                            <th>Precio mensual</th>
+                            <th scope="col">Plan</th>
+                            <th scope="col">Productos</th>
+                            <th scope="col">Usuarios</th>
+                            <th scope="col">Alertas de stock</th>
+                            <th scope="col">Precio mensual</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Básico</td>
+                            <th scope="row">Básico</th>
                             <td>Hasta 100</td>
                             <td>1</td>
                             <td>No</td>
-                            <td>Gratis</td>
+                            <td class="precio">Gratis</td>
                         </tr>
-                        <tr>
-                            <td>Negocio</td>
+                        <tr class="plan-destacado">
+                            <th scope="row">Negocio <span class="etiqueta">El más elegido</span></th>
                             <td>Hasta 1.000</td>
                             <td>3</td>
                             <td>Sí</td>
-                            <td>$30.000</td>
+                            <td class="precio">$30.000</td>
                         </tr>
                         <tr>
-                            <td>Empresa</td>
+                            <th scope="row">Empresa</th>
                             <td>Ilimitados</td>
                             <td>10</td>
                             <td>Sí</td>
-                            <td>$80.000</td>
+                            <td class="precio">$80.000</td>
                         </tr>
                     </tbody>
                 </table>
@@ -121,66 +168,117 @@
         <section id="video" class="seccion">
             <h2>¿Por qué controlar tu inventario?</h2>
             <div class="video-contenedor">
-                <!-- REEMPLAZAR: cambie VIDEO_ID por el código del video de YouTube -->
+                <!-- TODO: cambie VIDEO_ID por el código del video de YouTube -->
                 <iframe src="https://www.youtube.com/embed/VIDEO_ID"
                         title="Video sobre la importancia del control de inventarios"
                         allowfullscreen></iframe>
             </div>
         </section>
 
-        <!-- Acceso: formularios de inicio de sesión y registro -->
-        <section id="acceso" class="seccion seccion-alterna">
-            <h2>Accede a StockControl</h2>
-            <div class="formularios">
+        <!-- Acceso: inicio de sesión y registro en una sola tarjeta con pestañas (js/acceso.js) -->
+        <section id="acceso" class="acceso">
+            <div class="acceso-texto">
+                <h2>Tu bodega, a un clic</h2>
+                <p>Entra para ver tu inventario o crea tu cuenta y registra tu primer producto hoy.</p>
+                <ul class="acceso-lista">
+                    <li>Plan Básico gratis, hasta 100 productos</li>
+                    <li>Alertas cuando algo se está agotando</li>
+                    <li>Cambia de plan cuando quieras</li>
+                </ul>
+            </div>
+
+            <div class="acceso-tarjeta">
+                <!-- Pestañas para cambiar entre formularios -->
+                <div class="pestanas" role="tablist" aria-label="Acceso">
+                    <button type="button" class="pestana" role="tab" id="tab-login" aria-controls="form-login" aria-selected="true">Iniciar sesión</button>
+                    <button type="button" class="pestana" role="tab" id="tab-registro" aria-controls="form-registro" aria-selected="false" tabindex="-1">Crear cuenta</button>
+                </div>
 
                 <!-- Formulario de inicio de sesión -->
-                <form id="form-login" class="formulario">
-                    <h3>Iniciar sesión</h3>
+                <form id="form-login" class="formulario" role="tabpanel" aria-labelledby="tab-login">
+                    <div class="campo">
+                        <label for="login-correo">Correo electrónico</label>
+                        <input type="email" id="login-correo" name="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+                    </div>
 
-                    <label for="login-correo">Correo electrónico</label>
-                    <input type="email" id="login-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
-
-                    <label for="login-clave">Contraseña</label>
-                    <input type="password" id="login-clave" name="clave" minlength="6" required>
+                    <div class="campo">
+                        <label for="login-clave">Contraseña</label>
+                        <div class="clave">
+                            <input type="password" id="login-clave" name="clave" minlength="6" autocomplete="current-password" required>
+                            <button type="button" class="ver-clave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                <svg class="ojo-abierto" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="ojo-cerrado" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.9 5.2A10 10 0 0112 5c6.5 0 10 7 10 7a17 17 0 01-2.6 3.5M6.6 6.6C3.7 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 005.4-1.6M9.9 9.9a3 3 0 004.2 4.2M3 3l18 18"/></svg>
+                            </button>
+                        </div>
+                    </div>
 
                     <label class="casilla">
                         <input type="checkbox" name="recordar"> Recordarme
                     </label>
 
-                    <button type="submit" class="boton boton-principal">Entrar</button>
+                    <button type="submit" class="boton boton-principal boton-ancho">Iniciar sesión</button>
+                    <p class="mensaje" aria-live="polite"></p>
+                    <p class="cambiar">¿Aún no tienes cuenta? <a href="#registro">Crea una gratis</a></p>
                 </form>
 
                 <!-- Formulario de registro -->
-                <form id="form-registro" class="formulario">
-                    <h3>Crear cuenta</h3>
+                <form id="form-registro" class="formulario" role="tabpanel" aria-labelledby="tab-registro" hidden>
+                    <div class="fila-campos">
+                        <div class="campo">
+                            <label for="reg-nombre">Tu nombre</label>
+                            <input type="text" id="reg-nombre" name="nombre" maxlength="50" autocomplete="name" required>
+                        </div>
+                        <div class="campo">
+                            <label for="reg-negocio">Nombre del negocio</label>
+                            <input type="text" id="reg-negocio" name="negocio" autocomplete="organization" required>
+                        </div>
+                    </div>
 
-                    <label for="reg-nombre">Nombre completo</label>
-                    <input type="text" id="reg-nombre" name="nombre" maxlength="50" required>
+                    <div class="campo">
+                        <label for="reg-correo">Correo electrónico</label>
+                        <input type="email" id="reg-correo" name="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+                    </div>
 
-                    <label for="reg-negocio">Nombre del negocio</label>
-                    <input type="text" id="reg-negocio" name="negocio" required>
+                    <div class="campo">
+                        <label for="reg-clave">Contraseña</label>
+                        <div class="clave">
+                            <input type="password" id="reg-clave" name="clave" minlength="6" autocomplete="new-password" aria-describedby="ayuda-clave" required>
+                            <button type="button" class="ver-clave" aria-label="Mostrar contraseña" aria-pressed="false">
+                                <svg class="ojo-abierto" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="ojo-cerrado" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.9 5.2A10 10 0 0112 5c6.5 0 10 7 10 7a17 17 0 01-2.6 3.5M6.6 6.6C3.7 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 005.4-1.6M9.9 9.9a3 3 0 004.2 4.2M3 3l18 18"/></svg>
+                            </button>
+                        </div>
+                        <small class="ayuda" id="ayuda-clave">Mínimo 6 caracteres.</small>
+                    </div>
 
-                    <label for="reg-correo">Correo electrónico</label>
-                    <input type="email" id="reg-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
-
-                    <label for="reg-clave">Contraseña</label>
-                    <input type="password" id="reg-clave" name="clave" minlength="6" required>
-
-                    <label for="reg-plan">Plan</label>
-                    <select id="reg-plan" name="plan" required>
-                        <option value="">Selecciona un plan</option>
-                        <option value="basico">Básico</option>
-                        <option value="negocio">Negocio</option>
-                        <option value="empresa">Empresa</option>
-                    </select>
+                    <!-- Plan: opciones como botones de radio -->
+                    <fieldset class="planes-opciones">
+                        <legend>Plan</legend>
+                        <label class="plan-opcion">
+                            <input type="radio" name="plan" value="basico" checked>
+                            <span class="plan-nombre">Básico</span>
+                            <span class="plan-precio">Gratis</span>
+                        </label>
+                        <label class="plan-opcion">
+                            <input type="radio" name="plan" value="negocio">
+                            <span class="plan-nombre">Negocio</span>
+                            <span class="plan-precio">$30.000/mes</span>
+                        </label>
+                        <label class="plan-opcion">
+                            <input type="radio" name="plan" value="empresa">
+                            <span class="plan-nombre">Empresa</span>
+                            <span class="plan-precio">$80.000/mes</span>
+                        </label>
+                    </fieldset>
 
                     <label class="casilla">
                         <input type="checkbox" name="terminos" required> Acepto los términos y condiciones
                     </label>
 
-                    <button type="submit" class="boton boton-principal">Registrarme</button>
+                    <button type="submit" class="boton boton-principal boton-ancho">Crear cuenta</button>
+                    <p class="mensaje" aria-live="polite"></p>
+                    <p class="cambiar">¿Ya tienes cuenta? <a href="#acceso">Inicia sesión</a></p>
                 </form>
-
             </div>
         </section>
 
@@ -190,8 +288,16 @@
     <footer class="pie">
         <p class="pie-marca">StockControl</p>
         <p>Controla. Organiza. Optimiza.</p>
-        <p>&copy; 2026 StockControl. Todos los derechos reservados.</p>
+        <p><a href="contacto.html" class="pie-enlace">Escríbenos</a></p>
+        <p class="pie-legal">&copy; 2026 StockControl. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/demo.js"></script>
+    <script src="js/acceso.js"></script>
+    <!-- Conexión con Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>

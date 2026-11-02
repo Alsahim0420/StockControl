@@ -6,31 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <title>Proveedores | StockControl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
-<body>
+<body class="app-cuerpo">
 
-    <!-- ===== ENCABEZADO Y MENÚ DE LA PLATAFORMA ===== -->
-    <header>
-        <nav>
-            <ul>
+    <!-- ===== BARRA SUPERIOR DE LA PLATAFORMA ===== -->
+    <header class="app-barra">
+        <a href="productos.html" class="marca">
+            <img src="img/logo.jpg" alt="StockControl" class="app-logo">
+        </a>
+        <nav aria-label="Principal">
+            <ul class="app-menu">
                 <li><a href="productos.html">Productos</a></li>
-                <li><a href="proveedores.html">Proveedores</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="index.html">Cerrar sesión</a></li>
+                <li><a href="proveedores.html" aria-current="page">Proveedores</a></li>
             </ul>
         </nav>
+        <div class="app-usuario">
+            <span id="usuario-negocio" class="app-negocio"></span>
+            <button type="button" id="cerrar-sesion" class="boton boton-secundario boton-chico">Cerrar sesión</button>
+        </div>
     </header>
 
     <!-- ===== CONTENIDO PRINCIPAL ===== -->
-    <main>
+    <main class="app">
 
+        <div class="app-cabecera">
+            <div>
+                <h1>Proveedores</h1>
+                <p class="app-resumen" id="resumen">Cargando proveedores…</p>
+            </div>
+            <button type="button" class="boton boton-principal" id="nuevo-proveedor">Agregar proveedor</button>
+        </div>
+
+        <!-- Tabla de proveedores -->
+        <div class="tabla-app-contenedor">
+            <table class="tabla-app tabla-proveedores">
+                <thead>
+                    <tr>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Entrega</th>
+                        <th scope="col" class="num">Productos</th>
+                        <th scope="col"><span class="oculto">Acciones</span></th>
+                    </tr>
+                </thead>
+                <tbody id="lista-proveedores"></tbody>
+            </table>
+
+            <!-- Estado vacío -->
+            <div class="vacio" id="vacio" hidden>
+                <h2>Aún no tienes proveedores</h2>
+                <p>Guarda quién te surte y qué día entrega. Luego podrás asignarlo a tus productos.</p>
+                <button type="button" class="boton boton-principal" id="vacio-agregar">Agregar proveedor</button>
+            </div>
+        </div>
     </main>
 
-    <!-- ===== PIE DE PÁGINA ===== -->
-    <footer>
+    <!-- Plantilla de una fila (la llena js/proveedores.js) -->
+    <template id="plantilla-proveedor">
+        <tr>
+            <td><span class="celda-nombre"></span><small class="celda-contacto"></small></td>
+            <td class="celda-telefono"></td>
+            <td class="celda-correo"></td>
+            <td><span class="dia"></span></td>
+            <td class="num celda-productos"></td>
+            <td class="acciones">
+                <button type="button" class="icono editar" aria-label="Editar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z M14 6l4 4"/></svg></button>
+                <button type="button" class="icono borrar" aria-label="Eliminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16 M9 7V4h6v3 M6 7l1 13h10l1-13"/></svg></button>
+            </td>
+        </tr>
+    </template>
 
-    </footer>
+    <!-- Ventana para agregar o editar un proveedor -->
+    <dialog class="dialogo" id="dialogo-proveedor" aria-labelledby="dialogo-titulo">
+        <form class="formulario" id="form-proveedor">
+            <h2 id="dialogo-titulo">Agregar proveedor</h2>
 
+            <div class="campo">
+                <label for="prov-nombre">Nombre del proveedor</label>
+                <input type="text" id="prov-nombre" name="nombre" maxlength="80" placeholder="Café La Vega" required>
+            </div>
+
+            <div class="campo">
+                <label for="prov-contacto">Persona de contacto</label>
+                <input type="text" id="prov-contacto" name="contacto" maxlength="60">
+            </div>
+
+            <div class="fila-campos">
+                <div class="campo">
+                    <label for="prov-telefono">Teléfono</label>
+                    <input type="tel" id="prov-telefono" name="telefono" maxlength="20" placeholder="300 123 4567">
+                </div>
+                <div class="campo">
+                    <label for="prov-dia">Día de entrega</label>
+                    <select id="prov-dia" name="dia_entrega">
+                        <option value="">Sin día fijo</option>
+                        <option>Lunes</option>
+                        <option>Martes</option>
+                        <option>Miércoles</option>
+                        <option>Jueves</option>
+                        <option>Viernes</option>
+                        <option>Sábado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="prov-correo">Correo electrónico</label>
+                <input type="email" id="prov-correo" name="correo" placeholder="pedidos@proveedor.com">
+            </div>
+
+            <p class="mensaje" aria-live="polite"></p>
+            <div class="dialogo-botones">
+                <button type="button" class="boton boton-secundario" data-cerrar>Cancelar</button>
+                <button type="submit" class="boton boton-principal">Guardar proveedor</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ===== SCRIPTS: conexión con Supabase ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/proteger.js"></script>
+    <script src="js/proveedores.js"></script>
 </body>
 </html>

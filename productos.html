@@ -6,31 +6,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <title>Productos | StockControl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
-<body>
+<body class="app-cuerpo">
 
-    <!-- ===== ENCABEZADO Y MENÚ DE LA PLATAFORMA ===== -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="productos.html">Productos</a></li>
+    <!-- ===== BARRA SUPERIOR DE LA PLATAFORMA ===== -->
+    <header class="app-barra">
+        <a href="productos.html" class="marca">
+            <img src="img/logo.jpg" alt="StockControl" class="app-logo">
+        </a>
+        <nav aria-label="Principal">
+            <ul class="app-menu">
+                <li><a href="productos.html" aria-current="page">Productos</a></li>
                 <li><a href="proveedores.html">Proveedores</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="index.html">Cerrar sesión</a></li>
             </ul>
         </nav>
+        <div class="app-usuario">
+            <span id="usuario-negocio" class="app-negocio"></span>
+            <button type="button" id="cerrar-sesion" class="boton boton-secundario boton-chico">Cerrar sesión</button>
+        </div>
     </header>
 
     <!-- ===== CONTENIDO PRINCIPAL ===== -->
-    <main>
+    <main class="app">
 
+        <div class="app-cabecera">
+            <div>
+                <h1>Productos</h1>
+                <p class="app-resumen" id="resumen">Cargando inventario…</p>
+            </div>
+            <button type="button" class="boton boton-principal" id="nuevo-producto">Agregar producto</button>
+        </div>
+
+        <!-- Aviso de stock bajo (solo aparece si hay productos por pedir) -->
+        <div class="alerta-stock" id="alerta-stock" hidden>
+            <p><strong id="alerta-texto"></strong> Revisa a quién pedirle antes de que se agoten.</p>
+            <button type="button" class="boton boton-chico boton-alerta" id="ver-bajos">Ver solo esos</button>
+        </div>
+
+        <!-- Búsqueda y filtro -->
+        <div class="herramientas">
+            <label class="buscador">
+                <span class="oculto">Buscar producto</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+                <input type="search" id="buscar" placeholder="Buscar por nombre o código">
+            </label>
+            <label class="casilla">
+                <input type="checkbox" id="solo-bajos"> Solo stock bajo
+            </label>
+        </div>
+
+        <!-- Tabla de productos -->
+        <div class="tabla-app-contenedor">
+            <table class="tabla-app tabla-productos">
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col" class="num">Precio</th>
+                        <th scope="col" class="num">Mínimo</th>
+                        <th scope="col" class="num">En stock</th>
+                        <th scope="col"><span class="oculto">Acciones</span></th>
+                    </tr>
+                </thead>
+                <tbody id="lista-productos"></tbody>
+            </table>
+
+            <!-- Estado vacío -->
+            <div class="vacio" id="vacio" hidden>
+                <h2>Aún no tienes productos</h2>
+                <p>Agrega el primero con su cantidad y su mínimo. Te avisamos cuando se esté agotando.</p>
+                <button type="button" class="boton boton-principal" id="vacio-agregar">Agregar producto</button>
+            </div>
+            <p class="vacio vacio-filtro" id="sin-resultados" hidden>Ningún producto coincide con la búsqueda.</p>
+        </div>
     </main>
 
-    <!-- ===== PIE DE PÁGINA ===== -->
-    <footer>
+    <!-- Plantilla de una fila (la llena js/productos.js) -->
+    <template id="plantilla-producto">
+        <tr>
+            <td><span class="celda-nombre"></span><small class="celda-codigo"></small></td>
+            <td class="celda-proveedor"></td>
+            <td class="num celda-precio"></td>
+            <td class="num celda-minimo"></td>
+            <td class="num">
+                <div class="stepper">
+                    <button type="button" class="paso" data-paso="-1" aria-label="Restar una unidad">−</button>
+                    <span class="barra"></span>
+                    <span class="celda-cantidad"></span>
+                    <button type="button" class="paso" data-paso="1" aria-label="Sumar una unidad">+</button>
+                </div>
+            </td>
+            <td class="acciones">
+                <button type="button" class="icono editar" aria-label="Editar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z M14 6l4 4"/></svg></button>
+                <button type="button" class="icono borrar" aria-label="Eliminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16 M9 7V4h6v3 M6 7l1 13h10l1-13"/></svg></button>
+            </td>
+        </tr>
+    </template>
 
-    </footer>
+    <!-- Ventana para agregar o editar un producto -->
+    <dialog class="dialogo" id="dialogo-producto" aria-labelledby="dialogo-titulo">
+        <form class="formulario" id="form-producto">
+            <h2 id="dialogo-titulo">Agregar producto</h2>
 
+            <div class="campo">
+                <label for="prod-nombre">Nombre</label>
+                <input type="text" id="prod-nombre" name="nombre" maxlength="80" placeholder="Café molido 250 g" required>
+            </div>
+
+            <div class="fila-campos">
+                <div class="campo">
+                    <label for="prod-codigo">Código</label>
+                    <input type="text" id="prod-codigo" name="codigo" maxlength="30" placeholder="CAF-250">
+                </div>
+                <div class="campo">
+                    <label for="prod-precio">Precio de venta</label>
+                    <input type="number" id="prod-precio" name="precio" min="0" step="50" value="0" required>
+                </div>
+            </div>
+
+            <div class="fila-campos">
+                <div class="campo">
+                    <label for="prod-cantidad">En stock</label>
+                    <input type="number" id="prod-cantidad" name="cantidad" min="0" step="1" value="0" required>
+                </div>
+                <div class="campo">
+                    <label for="prod-minimo">Mínimo</label>
+                    <input type="number" id="prod-minimo" name="minimo" min="0" step="1" value="0" required>
+                </div>
+            </div>
+            <small class="ayuda">Cuando el stock llegue al mínimo, el producto se marca como stock bajo.</small>
+
+            <div class="campo">
+                <label for="prod-proveedor">Proveedor</label>
+                <select id="prod-proveedor" name="proveedor_id">
+                    <option value="">Sin proveedor</option>
+                </select>
+            </div>
+
+            <p class="mensaje" aria-live="polite"></p>
+            <div class="dialogo-botones">
+                <button type="button" class="boton boton-secundario" data-cerrar>Cancelar</button>
+                <button type="submit" class="boton boton-principal">Guardar producto</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ===== SCRIPTS: conexión con Supabase ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/proteger.js"></script>
+    <script src="js/productos.js"></script>
 </body>
 </html>
