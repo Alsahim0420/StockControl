@@ -86,6 +86,16 @@
             </div>
             <p class="vacio vacio-filtro" id="sin-resultados" hidden>Ningún producto coincide con la búsqueda.</p>
         </div>
+        <!-- Ilustración local del panel: segunda imagen con texto alternativo -->
+        <section class="guia-panel" aria-labelledby="guia-titulo">
+            <img src="img/panel.svg" width="520" height="360" loading="lazy"
+                alt="Ilustración de un panel de inventario con tarjetas de resumen, un gráfico de barras y una lista de productos">
+            <div>
+                <h2 id="guia-titulo">Mantén tus existencias al día</h2>
+                <p>Registra las entradas y salidas con los botones de cantidad y define un mínimo para identificar los productos que necesitas reponer.</p>
+            </div>
+        </section>
+
     </main>
 
     <!-- Plantilla de una fila (la llena js/productos.js) -->
@@ -157,6 +167,14 @@
             </div>
         </form>
     </dialog>
+
+    <!-- ===== PIE DE PÁGINA ===== -->
+    <footer class="pie">
+        <p class="pie-marca">StockControl</p>
+        <p>Controla. Organiza. Optimiza.</p>
+        <p><a href="contacto.html">Contacto y ayuda</a></p>
+        <p class="pie-legal">&copy; 2026 StockControl. Todos los derechos reservados.</p>
+    </footer>
 
     <!-- ===== SCRIPTS: conexión con Supabase ===== -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>

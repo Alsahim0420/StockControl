@@ -67,6 +67,16 @@
                 <button type="button" class="boton boton-principal" id="vacio-agregar">Agregar proveedor</button>
             </div>
         </div>
+        <!-- Ilustración local del panel: segunda imagen con texto alternativo -->
+        <section class="guia-panel" aria-labelledby="guia-titulo">
+            <img src="img/panel.svg" width="520" height="360" loading="lazy"
+                alt="Ilustración de un panel de inventario con tarjetas de resumen, un gráfico de barras y una lista de productos">
+            <div>
+                <h2 id="guia-titulo">Organiza tu próxima reposición</h2>
+                <p>Guarda los datos de contacto y el día de entrega de tus proveedores. Así podrás consultarlos cuando un producto llegue a su mínimo.</p>
+            </div>
+        </section>
+
     </main>
 
     <!-- Plantilla de una fila (la llena js/proveedores.js) -->
@@ -130,6 +140,14 @@
             </div>
         </form>
     </dialog>
+
+    <!-- ===== PIE DE PÁGINA ===== -->
+    <footer class="pie">
+        <p class="pie-marca">StockControl</p>
+        <p>Controla. Organiza. Optimiza.</p>
+        <p><a href="contacto.html">Contacto y ayuda</a></p>
+        <p class="pie-legal">&copy; 2026 StockControl. Todos los derechos reservados.</p>
+    </footer>
 
     <!-- ===== SCRIPTS: conexión con Supabase ===== -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>

@@ -1327,6 +1327,55 @@ img {
     background-color: #B91C1C;
 }
 
+/* ===== GUÍA VISUAL COMPARTIDA: imagen y contenido con Flexbox ===== */
+.guia-panel {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: var(--ancho);
+    margin: 40px auto;
+    padding: 32px 24px;
+    background-color: var(--papel);
+    border-radius: 16px;
+}
+
+.guia-panel img {
+    display: block;
+    width: 34%;
+    max-width: 320px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.guia-panel > div {
+    min-width: 0;
+}
+
+.guia-panel h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.guia-panel p {
+    margin-bottom: 0;
+}
+
+.pie a {
+    color: var(--cinta);
+    text-underline-offset: 4px;
+}
+
+.tabla-contacto {
+    min-width: 0;
+    table-layout: fixed;
+    overflow-wrap: anywhere;
+}
+
+.tabla-contacto caption {
+    text-align: left;
+    padding-bottom: 16px;
+    color: var(--texto-suave);
+}
+
 /* ===== RESPONSIVE: TABLET ===== */
 @media (max-width: 900px) {
     .hero {
@@ -1377,6 +1426,24 @@ img {
 
 /* ===== RESPONSIVE: CELULAR ===== */
 @media (max-width: 600px) {
+    .guia-panel {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        margin: 24px 0;
+    }
+
+    .guia-panel img {
+        width: 100%;
+        align-self: center;
+    }
+
+    .tabla-contacto th,
+    .tabla-contacto td {
+        padding: 12px 8px;
+        font-size: 0.875rem;
+    }
+
     .encabezado {
         flex-direction: column;
         padding: 8px 16px 12px;
@@ -1509,6 +1576,51 @@ img {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+    }
+}
+
+/* ===== RESPONSIVE: CELULAR COMPACTO ===== */
+/* Tercer punto de corte: a 400 px o menos damos más espacio a los controles. */
+@media (max-width: 400px) {
+    .menu {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        text-align: center;
+    }
+
+    .encabezado nav {
+        width: 100%;
+    }
+
+    .menu .boton {
+        width: 100%;
+        padding: 10px 8px;
+        font-size: 0.875rem;
+    }
+
+    .app-cabecera {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .herramientas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buscador {
+        flex: auto;
+        width: 100%;
+    }
+
+    .dialogo-botones {
+        flex-direction: column;
+    }
+
+    .guia-panel {
+        padding: 24px 16px;
     }
 }
 
